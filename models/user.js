@@ -1,6 +1,4 @@
 var db = require('../config/db');
-var sanitizeHtml = require('sanitize-html');
-var htmlToText = require('html-to-text');
 
 var userSchema = db.Schema({
   name: {

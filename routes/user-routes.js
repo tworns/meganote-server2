@@ -23,6 +23,7 @@ if(!passwordsPresent(req.body.user) || !passwordMatch(req.body.user)){
      });
    });
 });
+
 module.exports  = router;
 function passwordsPresent(payload){
   return (payload.password && payload.passwordConfirmation);

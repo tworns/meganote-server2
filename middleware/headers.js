@@ -1,4 +1,4 @@
-modules.exports = (req, res, next) => {
+module.exports = (req, res, next) => {
   // Allow CORS.
   res.header('Access-Control-Allow-Origin', '*');
 
@@ -10,4 +10,4 @@ modules.exports = (req, res, next) => {
 
   // Continue processing the request.
   next();
-}
+};
