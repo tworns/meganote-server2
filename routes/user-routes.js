@@ -19,7 +19,7 @@ if(!passwordsPresent(req.body.user) || !passwordMatch(req.body.user)){
      var token = jwt.sign(userData._id, process.env.JWT_SECRET, {expiresIn: 60*60*24});
      res.json({
        authToken: token,
-       note: userData
+       user: userData
      });
    });
 });
