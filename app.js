@@ -5,7 +5,7 @@ var User = require('./models/user');
 var bodyParser = require('body-parser');
 var noteRoutes = require('./routes/note-routes');
 var userRoutes = require('./routes/user-routes');
-var loginRoutes = require('./routes/login-routes');
+var sessionRoutes = require('./routes/session-routes');
 var headersMiddleware = require('./middleware/headers');
 var app = express();
 
@@ -17,8 +17,7 @@ app.use(bodyParser.json());
 //Routes
 app.use('/api/v1/notes', noteRoutes);
 app.use('/api/v1/users', userRoutes);
-app.use('/api/v1/login', loginRoutes);
-
+app.use('/api/v1/session', loginRoutes);
 
 
 app.listen(3030, function() {
