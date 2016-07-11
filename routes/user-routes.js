@@ -26,7 +26,7 @@ if(!passwordsPresent(req.body.user) || !passwordMatch(req.body.user)){
 //UPDATE
 router.put('/:userId', (req,res)=> {
   User.findOne({
-    _id = req.params.id,
+    _id: req.params.id,
   })
   .then(
     user => {
