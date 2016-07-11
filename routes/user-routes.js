@@ -23,6 +23,36 @@ if(!passwordsPresent(req.body.user) || !passwordMatch(req.body.user)){
      });
    });
 });
+//UPDATE
+router.put('/:userId', (req,res)=> {
+  User.findOne({
+    _id = req.params.id,
+  })
+  .then(
+    user => {
+      user.name = req.body.user.name;
+      user.username = req.body.user.username;
+      user.save()
+      .then(
+        ()=> {
+          res.json({
+            user
+          });
+        },
+        //failed
+        () => {
+          res.status(422).json({message:"Unable to update user."});
+        }
+      );
+    },
+    ()=>{
+      res.status(404).json({message:"User not found"});
+    }
+  );
+
+});
+
+
 
 module.exports  = router;
 function passwordsPresent(payload){
