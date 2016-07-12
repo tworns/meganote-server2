@@ -1,6 +1,7 @@
 module.exports = (req,res,next) => {
   const token = req.headers.authorization;
-  var jwt = require('jsonwebtoken')
+  var jwt = require('jsonwebtoken');
+  var User = require('../models/user');
   if( isPreflight(req) ||isLoggingInOrSigningUp(req)) {
     next();
     return;
@@ -10,7 +11,18 @@ module.exports = (req,res,next) => {
     jwt.verify(token, process.env.JWT_SECRET, (err, decodedPayload) =>{
       if(decodedPayload){
         //get user
-        res.json({decodedPayload});
+        User.findOne({_id:decodedPayload._id}).then(
+          user => {
+            if(user){
+              //add user to request;
+              req.user = user;
+              next();
+            }
+            else {
+              res.status(401).json({message: 'Authentication required.'});
+            }
+          }
+        );
       }
       else {
         res.status(401).json({message: 'Authentication required.'});
