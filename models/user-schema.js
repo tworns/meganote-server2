@@ -1,6 +1,6 @@
 var db = require('../config/db');
 var bcrypt = require('bcryptjs');
-
+var noteSchema = require('./note-schema');
 var userSchema = db.Schema({
   name: {
     type: String,
