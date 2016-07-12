@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 //Routes
 app.use('/api/v1/notes', noteRoutes);
 app.use('/api/v1/users', userRoutes);
-app.use('/api/v1/session', sessionRoutes);
+app.use('/api/v1/sessions', sessionRoutes);
 
 
 app.listen(3030, function() {
