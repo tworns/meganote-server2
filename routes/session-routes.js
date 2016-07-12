@@ -14,7 +14,7 @@ router.post('/', (req, res) => {
           user.authenticate(req.body.user.password, (isMatch) => {
             if (isMatch) {
               // correct password
-              var token = jwt.sign(user._id, process.env.JWT_SECRET, {
+              var token = jwt.sign({_id:user._id}, process.env.JWT_SECRET, {
                 expiresIn: 60*60*24
               });
               res.json({

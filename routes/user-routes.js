@@ -16,7 +16,7 @@ if(!passwordsPresent(req.body.user) || !passwordMatch(req.body.user)){
    });
    user.save()
    .then((userData)=>{
-     var token = jwt.sign(userData._id, process.env.JWT_SECRET, {expiresIn: 60*60*24});
+     var token = jwt.sign({_id:userData._id}, process.env.JWT_SECRET, {expiresIn: 60*60*24});
      res.json({
        authToken: token,
        user: userData
