@@ -14,7 +14,13 @@ if(!passwordsPresent(req.body.user) || !passwordMatch(req.body.user)){
      name: req.body.user.name,
      passwordDigest: bcrypt.hashSync(req.body.user.password, 10),
    });
-   user.save()
+   user.save(
+     (error) => {
+       res.status(500).json({
+         message: error
+       });
+     }
+   )
    .then((userData)=>{
      var token = jwt.sign({_id:userData._id}, process.env.JWT_SECRET, {expiresIn: 60*60*24});
      res.json({
