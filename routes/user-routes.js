@@ -8,19 +8,14 @@ if(!passwordsPresent(req.body.user) || !passwordMatch(req.body.user)){
   res.status(422).json({
     message: 'Passwords must match!'
   });
+  return;
 }
   var user = new User({
      username: req.body.user.username,
      name: req.body.user.name,
      passwordDigest: bcrypt.hashSync(req.body.user.password, 10),
    });
-   user.save(
-     (error) => {
-       res.status(500).json({
-         message: error
-       });
-     }
-   )
+   user.save()
    .then((userData)=>{
      var token = jwt.sign({_id:userData._id}, process.env.JWT_SECRET, {expiresIn: 60*60*24});
      res.json({
@@ -30,7 +25,7 @@ if(!passwordsPresent(req.body.user) || !passwordMatch(req.body.user)){
    });
 });
 //UPDATE
-router.put('/:userId', (req,res)=> {
+router.put('/:Id', (req,res)=> {
   User.findOne({
     _id: req.params.id,
   })

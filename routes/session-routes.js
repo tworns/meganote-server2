@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
                 message: 'We were unable to log you in with those credentials.'
               });
             }
-          })
+          });
         }
         else {
           // user does not exist
