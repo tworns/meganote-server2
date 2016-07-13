@@ -8,7 +8,6 @@ module.exports = (req,res,next) => {
     return;
   }
   const token = req.headers.authorization;
-  if(token){
     //verify token, get user;
     jwt.verify(token, process.env.JWT_SECRET, (err, decodedPayload) =>{
       if(!decodedPayload){
@@ -29,11 +28,8 @@ module.exports = (req,res,next) => {
             }
           }
         );
-    });}
+    });
 
-  else{
-    res.status(401).json({message: 'Authentication required.'});
-  }
 };
 function isLoggingInOrSigningUp (req) {
   if(req.method.toLowerCase() !== 'post'){

@@ -6,7 +6,7 @@ var jwt = require('jsonwebtoken');
 router.post('/', function(req, res) {
 if(!passwordsPresent(req.body.user) || !passwordMatch(req.body.user)){
   res.status(422).json({
-    message: 'Passwords must match!'
+        message: 'Passwords must match!'
   });
   return;
 }
@@ -25,7 +25,7 @@ if(!passwordsPresent(req.body.user) || !passwordMatch(req.body.user)){
    },
  (err) => {
    if(err){
-     res.status(422).json(err);
+     res.status(422).json(err.username.message);
    }
  });
 });
@@ -47,7 +47,7 @@ router.put('/:Id', (req,res)=> {
         },
         //failed
         (err) => {
-          res.status(422).json(err);
+          res.status(422).json(err.username.messag);
         }
       );
     },

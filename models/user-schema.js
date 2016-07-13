@@ -4,17 +4,17 @@ var noteSchema = require('./note-schema');
 var beautifyUnique = require('mongoose-beautiful-unique-validation');
 var userSchema = db.Schema({
   name: {
+    requried: [true, 'Cannot have blank name.'],
     type: String,
-    requried: true,
   },
 
   username: {
     type:String,
-    required: true,
+    required: [true, 'Must have a username.'],
     unique: 'Username is already in use.'},
     passwordDigest:{
       type: String,
-      required: true,
+      required: [true, 'Password cannot be blank.'],
 
     },
     updated_at: { type: Date, default: Date.now },
