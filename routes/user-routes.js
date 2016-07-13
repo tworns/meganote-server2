@@ -22,7 +22,12 @@ if(!passwordsPresent(req.body.user) || !passwordMatch(req.body.user)){
        authToken: token,
        user: userData
      });
-   });
+   },
+ (err) => {
+   if(err){
+     res.status(422).json(err);
+   }
+ });
 });
 //UPDATE
 router.put('/:Id', (req,res)=> {
@@ -41,8 +46,8 @@ router.put('/:Id', (req,res)=> {
           });
         },
         //failed
-        () => {
-          res.status(422).json({message:"Unable to update user."});
+        (err) => {
+          res.status(422).json(err);
         }
       );
     },
